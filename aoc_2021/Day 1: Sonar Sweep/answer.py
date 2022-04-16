@@ -27,19 +27,6 @@ num1 = 0
 num2 = 0
 window_size = 3
 window_sum = 0
-"""
-with open('test.txt', 'r') as file:
-    for lines in file:
-        line = lines.splitlines()
-
-        print('\nrow number is : ', n, ' - and number ', line)
-
-        print(line)
-        n += 1
-"""
-
-# file = open('test.txt', 'r')
-# file = file.read().rstrip()
 
 file = open("inputs.txt", "r")
 inputs = file.read().splitlines()
