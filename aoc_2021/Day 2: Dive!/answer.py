@@ -1,10 +1,11 @@
 # --- Day 2: Dive! ---
 ## What do you get if you multiply your final horizontal position by your final depth?
+
 def run():
     print('run')
     inputs = read_file()
-    print('Last position: ', part1(inputs))
-    part2()
+    print('Part 1 answer: ', part1(inputs))
+    print('Part 2 answer: ', part2(inputs))
 
 def part1(inputs):
     horizontal = 0
@@ -35,18 +36,51 @@ def part1(inputs):
     # print('last position: ', last_position)
     return last_position
 
-
-
-def part2():
+def part2(inputs):
+    aim = 0
     horizontal = 0
     depth = 0
-    last_position = 0
-    aim = 0
+    final_position = 0
     print('part2')
+    for i in range(len(inputs)):
+        #print(inputs[i].split(','))
+        #print(inputs[i].split(' '))
+        #print(inputs[i].split(' ')[0])
+        if inputs[i].split(' ')[0] == 'forward':
+            print('dir: ' + inputs[i].split(' ')[0] + ' - amount: ' + inputs[i].split(' ')[1])
+            horizontal += int(inputs[i].split(' ')[1])
+            depth += (int(inputs[i].split(' ')[1]) * aim)
+            print('horizontal: ', horizontal)
+            print('depth:', depth)
+        if inputs[i].split(' ')[0] == 'down':
+            print('dir: ' + inputs[i].split(' ')[0] + ' - amount: ' + inputs[i].split(' ')[1])
+            aim += int(inputs[i].split(' ')[1])
+            print('aim:', aim)
+        if inputs[i].split(' ')[0] == 'up':
+            print('dir: ' + inputs[i].split(' ')[0] + ' - amount: ' + inputs[i].split(' ')[1])
+            aim -= int(inputs[i].split(' ')[1])
+            print('aim: ', aim)
+    
+    print('')
+    print('horizontal: ', horizontal)
+    print('depth: ', depth)
+
+    # final_position += (horizontal*aim)
+    # print('final position: ', horizontal*aim)
+    # print('Final position: ', multiply(horizontal, depth))
+    return(multiply(horizontal, depth))
+
+def multiply(x, y):
+    print('multiply')
+    print('x ', x)
+    print('y ', y)
+    print('x*y ', x*y)
+    return x*y
+
 
 def read_file():
     file = open("inputs.txt", "r")
-    # file = open("test.txt", "r")
+    #file = open("test.txt", "r")
     inputs = file.read().splitlines()
     #inputs = file.read()
     print(inputs)
