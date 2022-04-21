@@ -48,5 +48,6 @@ def read_file():
     return inputs
 
 if __name__ == '__main__':
+    print('--- Day 2: Dive! ---')
     run()
     

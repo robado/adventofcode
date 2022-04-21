@@ -1,4 +1,7 @@
+# --- Day 1: Sonar Sweep ---
 # How many measurements are larger than the previous measurement?
+
+print('--- Day 1: Sonar Sweep ---')
 
 measurements = 0 
 num2 = 0
