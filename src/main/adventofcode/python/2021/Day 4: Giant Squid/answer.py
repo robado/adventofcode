@@ -19,7 +19,9 @@ def get_bingo_numbers(bingo):
     # return bingo_nums
     
 def get_bingo_tables(bingo):
-    print('get_bingo_tables')
+    print('get_bingo_tables..')
+    bingo_tables = bingo.readlines()[:]
+    print(bingo_tables)
 
     
 def read_file():
