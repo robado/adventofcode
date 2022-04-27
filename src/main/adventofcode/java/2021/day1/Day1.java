@@ -11,7 +11,7 @@ import src.main.adventofcode.java.utils.Utils;
 class Day1 {
     public static void main(String[] args) {
         System.out.println("Day 1"); 
-        List<Integer> exampleInput = Utils.inputTolist(new File("/Users/robado/coding/adventofcode/src/main/recources/2021-example/day1.txt"));
+        List<Integer> exampleInput = Utils.inputTolist(new File("src/main/recources/2021-example/day1.txt"));
         System.out.println(part1(exampleInput));
         System.out.println(part2());
     }
