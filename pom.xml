@@ -6,7 +6,7 @@
 	<artifactId>adventofcode</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<build>
-		<sourceDirectory>src/main/java/2021</sourceDirectory>
+		<sourceDirectory>src/main/adventofcode/java/2021</sourceDirectory>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -28,7 +28,7 @@
 						</goals>
 						<configuration>
 							<sources>
-								<source>src/main/java/2021</source>
+								<source>src/main/adventofcode/java/2021</source>
 							</sources>
 						</configuration>
 					</execution>

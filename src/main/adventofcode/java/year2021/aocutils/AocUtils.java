@@ -1,4 +1,4 @@
-package utils;
+package aocutils;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Utils {
+public class AocUtils {
 
-    public static List<Integer> inputToIntlist(File inputFile) {
+    public static List<Integer> inputTolist(File inputFile) {
         System.out.println("inputTolist");
         List<Integer> inputs = new ArrayList<>();
         try {
