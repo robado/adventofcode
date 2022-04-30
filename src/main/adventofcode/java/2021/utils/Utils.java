@@ -9,7 +9,6 @@ import java.util.Scanner;
 public class Utils {
 
     public static List<Integer> inputToIntlist(File inputFile) {
-        System.out.println("inputTolist");
         List<Integer> inputs = new ArrayList<>();
         try {
             Scanner s = new Scanner(inputFile);
