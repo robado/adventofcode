@@ -12,9 +12,8 @@ class Day1 {
     public static void main(String[] args) {
         System.out.println("Day 1");
         List<Integer> inputs = Utils.inputToIntlist(new File("src/main/recources/2021/day1.txt"));
-        List<Integer> exampleInput = Utils.inputToIntlist(new File("src/main/recources/2021-example/day1.txt"));
-        System.out.println("Part 1 answer: " + part1(inputs));
-        System.out.println("Part 2 answer: " + part2(inputs));
+        System.out.println("Part 1: " + part1(inputs));
+        System.out.println("Part 2: " + part2(inputs));
     }
 
     public static Integer part1(List<Integer> inputs) {
@@ -44,8 +43,6 @@ class Day1 {
     }
 
     public static Integer sliding_window(List<Integer> measurements, int window_size) {
-        int sum_of_windows = 0;
-        int max_sum_of_windows = 0;
         int measurements_amout = 0;
         int fNum = 0; 
         int sNum = 0;
@@ -56,14 +53,9 @@ class Day1 {
         }
 
         for (int i = 0; i < measurements.size() - window_size+1; i++) {
-            System.out.println("numbers: "+ measurements.get(i));
-            //sum_of_windows += inputs.get(i);
-            System.out.println(measurements.subList(i,(i+window_size)));
             for (Integer asd : measurements.subList(i, i+window_size)) {
                 fNum += asd;
             }
-            System.out.println("fNum: " + fNum);
-            System.out.println("sNum: " + sNum);
 
             if (fNum > sNum) {
                 if (sNum == 0) {
@@ -80,21 +72,6 @@ class Day1 {
             }
         
         }
-
-        System.out.println("measurements_amount: " + measurements_amout);
-
-        /*
-        for (int i = 0; i < window_size; i++) {
-            max_sum_of_windows += inputs.get(i);
-        }
-
-        int sum_of_windows = max_sum_of_windows;
-        for (int i = window_size; i < inputs.size(); i++) {
-            sum_of_windows += inputs.get(i) - inputs.get(i - window_size);
-            max_sum_of_windows = Math.max(max_sum_of_windows, sum_of_windows);
-        }
-        */
-
 
         return measurements_amout;
 
