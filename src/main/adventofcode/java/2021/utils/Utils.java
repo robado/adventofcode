@@ -1,6 +1,8 @@
 package utils;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,7 @@ public class Utils {
         try {
             Scanner s = new Scanner(inputFile);
         while (s.hasNextInt()) {
+            System.out.println(s.nextInt());
             inputs.add(s.nextInt());
         }
         s.close();
@@ -20,6 +23,22 @@ public class Utils {
             e.printStackTrace();
         }
 
+        return inputs;
+    }
+
+    public static List<String> stringToFile(File inputFile) {
+        List<String> inputs = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(inputFile));
+            String line;
+            while ((line = br.readLine()) != null) {
+                // sb.append(line).append("\n");
+                inputs.add(line);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return inputs;
     }
 }
