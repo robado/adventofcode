@@ -10,12 +10,11 @@ import java.util.Scanner;
 
 public class Utils {
 
-    public static List<Integer> inputToIntlist(File inputFile) {
+    public static List<Integer> intTolist(File inputFile) {
         List<Integer> inputs = new ArrayList<>();
         try {
             Scanner s = new Scanner(inputFile);
         while (s.hasNextInt()) {
-            System.out.println(s.nextInt());
             inputs.add(s.nextInt());
         }
         s.close();
@@ -28,12 +27,10 @@ public class Utils {
 
     public static List<String> stringToFile(File inputFile) {
         List<String> inputs = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
         try {
             BufferedReader br = new BufferedReader(new FileReader(inputFile));
             String line;
             while ((line = br.readLine()) != null) {
-                // sb.append(line).append("\n");
                 inputs.add(line);
             }
         } catch (Exception e) {

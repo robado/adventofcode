@@ -11,7 +11,7 @@ import utils.Utils;
 class Day1 {
     public static void main(String[] args) {
         System.out.println("Day 1");
-        List<Integer> inputs = Utils.inputToIntlist(new File("src/main/recources/2021/day1.txt"));
+        List<Integer> inputs = Utils.intTolist(new File("src/main/recources/2021/day1.txt"));
         System.out.println("Part 1: " + part1(inputs));
         System.out.println("Part 2: " + part2(inputs));
     }
@@ -19,7 +19,7 @@ class Day1 {
     public static Integer part1(List<Integer> inputs) {
         int measurements = 0;
         int secondNumber = 0;
-        
+
         for (int i = 0; i < inputs.size(); i++) {
             int firstNumber = inputs.get(i);
 
@@ -44,7 +44,7 @@ class Day1 {
 
     public static Integer sliding_window(List<Integer> measurements, int window_size) {
         int measurements_amout = 0;
-        int fNum = 0; 
+        int fNum = 0;
         int sNum = 0;
 
         if (measurements.size() < window_size) {
@@ -52,8 +52,8 @@ class Day1 {
             return -1;
         }
 
-        for (int i = 0; i < measurements.size() - window_size+1; i++) {
-            for (Integer asd : measurements.subList(i, i+window_size)) {
+        for (int i = 0; i < measurements.size() - window_size + 1; i++) {
+            for (Integer asd : measurements.subList(i, i + window_size)) {
                 fNum += asd;
             }
 
@@ -70,7 +70,7 @@ class Day1 {
                 sNum = fNum;
                 fNum = 0;
             }
-        
+
         }
 
         return measurements_amout;
