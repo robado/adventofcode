@@ -17,7 +17,7 @@ public class Day3 {
         List<String> binaries = Utils.stringToFile(new File("src/main/recources/2021/day3.txt"));
 
         System.out.println("Part 1: " + part1(binaries));
-        // System.out.println("Part 2: " + part2(binaries));
+        System.out.println("Part 2: " + part2(binaries));
     }
 
     private static Integer part1(List<String> binaries) {

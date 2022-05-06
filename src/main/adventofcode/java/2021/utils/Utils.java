@@ -12,14 +12,20 @@ public class Utils {
 
     public static List<Integer> intTolist(File inputFile) {
         List<Integer> inputs = new ArrayList<>();
+        Scanner s = null;
         try {
-            Scanner s = new Scanner(inputFile);
-        while (s.hasNextInt()) {
-            inputs.add(s.nextInt());
-        }
-        s.close();
+            s = new Scanner(inputFile);
+            while (s.hasNextInt()) {
+                inputs.add(s.nextInt());
+            }
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                s.close();
+            } catch (Exception e) {
+                //TODO: handle exception
+            }
         }
 
         return inputs;
@@ -27,14 +33,21 @@ public class Utils {
 
     public static List<String> stringToFile(File inputFile) {
         List<String> inputs = new ArrayList<>();
+        BufferedReader br = null;
         try {
-            BufferedReader br = new BufferedReader(new FileReader(inputFile));
+            br = new BufferedReader(new FileReader(inputFile));
             String line;
             while ((line = br.readLine()) != null) {
                 inputs.add(line);
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                br.close();
+            } catch (Exception e) {
+                //TODO: handle exception
+            }
         }
         return inputs;
     }
