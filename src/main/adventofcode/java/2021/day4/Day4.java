@@ -6,7 +6,9 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import utils.Utils;
@@ -36,9 +38,9 @@ public class Day4 {
         // This is just to print bingo table multidimensional list
         // System.out.println("bingo tables: " + Arrays.toString(bingoTables.toArray()));
         // System.out.println("bingotables;");
-        for (int[][] table : bingoTables) {
+        //for (int[][] table : bingoTables) {
             // System.out.println(Arrays.deepToString(table).replace("], ", "]\n"));
-        }
+        //}
         
         // draw numbers = With for/while or somekind of a loop
         for (int i = 0; i < winningNumbers.size(); i++) { // Get the size of winning numbers list and loop number by number 
@@ -69,11 +71,12 @@ public class Day4 {
             drawNums.add(num);
 
             for (int[][] table : bingoTables) {
-                boolean winNumbers = checkForWins(table, drawNums);
+                boolean win = checkForWins(table, drawNums);
                 
-                if (winNumbers) { // If boolean value is TRUE
+                if (win) { // If boolean value is TRUE
                     // Get/find the sum of all unmarked numbers 
                     System.out.println("win");
+                    // After winning get the table that won and the last number that won
                 }
             }
         }
@@ -86,6 +89,7 @@ public class Day4 {
     }
 
     private static boolean checkForWins(int[][] table, List<Integer> drawNum) {
+        System.out.println("Rows");
         System.out.println("numbers:"+Arrays.toString(drawNum.toArray()));
         System.out.println(Arrays.deepToString(table).replace("], ", "]\n"));
         // Check vertically (row)
@@ -93,27 +97,57 @@ public class Day4 {
         // Compare row list to drawNum list
         // I guess....
         // This should check 1 number at a time. And if it contains 4 
-        List<Integer> rowOrColumnNumbers = new ArrayList<>();
+        
+        //List<Integer> rowNumbers = new ArrayList<>();
+        Set<Integer> rowNumbers = new HashSet<Integer>();
         for (int i = 0; i < table.length; i++) {
             for (Integer rowNumner : table[i]) {
-                rowOrColumnNumbers.add(rowNumner);
-                //System.out.println("rowOrColumnNumbers:"+rowOrColumnNumbers);
-                System.out.println(drawNum.containsAll(rowOrColumnNumbers));
-                if (drawNum.containsAll(rowOrColumnNumbers)) {
-                    return true;
-                }
-            }
-            rowOrColumnNumbers.clear();
-        }
+                rowNumbers.add(rowNumner);
+                //System.out.println("rowNumbers:"+rowNumbers);
+                //System.out.println(drawNum.containsAll(rowNumbers));
 
+                // https://stackoverflow.com/questions/1075656/simple-way-to-find-if-two-different-lists-contain-exactly-the-same-elements
+                // containsAll check for same elements but indepented of order
+                //if (drawNum.containsAll(rowOrColumnNumbers)) {
+                //    return true;
+                //}
+            }
+            //System.out.println("rowOrColumn: " + Arrays.toString(rowNumbers.toArray()));
+            //System.out.println("drawNum: " + Arrays.toString(drawNum.toArray()));
+            //System.out.println("fore looping after: " + drawNum.containsAll(rowNumbers));
+            //System.out.println("fore looping after but reversed: " + rowNumbers.containsAll(drawNum));
+
+
+            if (drawNum.containsAll(rowNumbers)) { // Check when the whole row is in list to the already drawn numbers
+                System.out.println("Row : " + Arrays.toString(rowNumbers.toArray()) + " won!!!");
+                return true;
+            }
+            rowNumbers.clear();
+        }
         
         //System.out.println(rowOrColumnNumbers.containsAll(drawNum));
 
         //System.out.println("row:"+Arrays.toString(rowOrColumnNumbers.toArray())); 
+
+        System.out.println("No winning rows");
         
         // Check horizontally (column)
         // Create another list to store all column numbers and compare to the drawNum list
 
+        Set<Integer> colNumbers = new HashSet<>();
+        for (int i = 0; i < table.length; i++) {
+            for (int j = 0; j < table.length; j++) {
+                // System.out.println("Columns: " + table[j][i]);
+                colNumbers.add(table[j][i]);
+            }
+            if (drawNum.containsAll(colNumbers)) {
+                System.out.println("Column : " + Arrays.toString(colNumbers.toArray()) + " won!!!");
+                return true;
+            }
+            colNumbers.clear();
+        }
+
+        System.out.println("No winning columns");
 
         // Return false if no wins with the table
         System.out.println(" ");
