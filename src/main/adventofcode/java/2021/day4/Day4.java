@@ -19,7 +19,7 @@ public class Day4 {
     public static void main(String[] args) {
         System.out.println("Day 3");
         // List<String> bingo = Utils.stringToFile(new File("src/main/recources/2021-example/day4.txt"));
-        File bingoFile = new File("src/main/recources/2021-example/day4.txt");
+        File bingoFile = new File("src/main/recources/2021/day4.txt");
 
         System.out.println("Part 1: " + part1(bingoFile));
         //System.out.println("Part 2: " + part2(binaries));
@@ -68,18 +68,21 @@ public class Day4 {
         // How can I check if a row or a column is complete????
         //List<Integer> drawNums = new ArrayList<>();
         Set<Integer> drawNums = new HashSet<>();
-        int total = 0;
-        List<Integer> unmarkedNums = new ArrayList<>();
+        int unmarkedNumTotal = 0;
         for (int i = 0; i < winningNumbers.size(); i++) {
             int num = winningNumbers.get(i);
             //System.out.println("Next number:"+num);
             drawNums.add(num);
 
             for (int[][] table : bingoTables) {
-                boolean win = checkForWins(table, drawNums);
+                System.out.println(Arrays.deepToString(table).replace("], ", "]\n"));
+                System.out.println(" ");
 
                 // I think I need to somehow exclude the WON tables
                 // Maybe if win add to 'wonTables' set list and on every loop check if that table has won. If yes then 'continue' or skip to the next table.
+
+                boolean win = checkForWins(table, drawNums);
+
                 
                 if (win) { // If boolean value is TRUE
                     // Get/find the sum of all unmarked numbers 
@@ -98,16 +101,18 @@ public class Day4 {
                     // IntStream iStream = Stream.of(table).flatMapToInt(n -> Arrays.stream(n)).filter(a -> !drawNums.contains(a));
                     // iStream.forEach(System.out::println);
                     
-                    total = Stream.of(table).flatMapToInt(row -> Arrays.stream(row)).filter(nums -> !drawNums.contains(nums)).sum();
+                    // https://www.netjstech.com/2017/01/flatmap-in-java.html -- flatMapToInt
+                    // 2D array to flatMap - Stream all the values - Filter with the drawnNumbers - Get the sum
+                    unmarkedNumTotal = Stream.of(table).flatMapToInt(row -> Arrays.stream(row)).filter(nums -> !drawNums.contains(nums)).sum(); 
 
                     //System.out.println("Total: " + total);
                     //System.out.println(14+21+17+24+4+10+16+15+9+19+18+8+23+26+20+22+11+13+6+5+2+0+12+3+7);
                     // System.out.println(10+16+15+19+18+8+26+20+22+13+6+5+12+3);
 
-                    System.out.println("Total * winning number: " + total*num);
+                    System.out.println("Total * winning number: " + unmarkedNumTotal*num);
 
                     System.out.println("##### WIN ##### \n" );
-                    return total*num;
+                    return unmarkedNumTotal*num;
                 }
             }
         }
