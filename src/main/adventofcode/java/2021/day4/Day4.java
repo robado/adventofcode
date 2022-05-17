@@ -10,6 +10,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import utils.Utils;
 
@@ -23,7 +25,7 @@ public class Day4 {
         //System.out.println("Part 2: " + part2(binaries));
     }
 
-    private static String part1(File bingoFile) {
+    private static Integer part1(File bingoFile) {
         System.out.println("part1");
 
         // get the winning numbers
@@ -64,7 +66,10 @@ public class Day4 {
         // check for winners (check winners after each number drawn???)
         // IF there is a winner (1 complete row or column of marked numbers)
         // How can I check if a row or a column is complete????
-        List<Integer> drawNums = new ArrayList<>();
+        //List<Integer> drawNums = new ArrayList<>();
+        Set<Integer> drawNums = new HashSet<>();
+        int total = 0;
+        List<Integer> unmarkedNums = new ArrayList<>();
         for (int i = 0; i < winningNumbers.size(); i++) {
             int num = winningNumbers.get(i);
             //System.out.println("Next number:"+num);
@@ -72,11 +77,37 @@ public class Day4 {
 
             for (int[][] table : bingoTables) {
                 boolean win = checkForWins(table, drawNums);
+
+                // I think I need to somehow exclude the WON tables
+                // Maybe if win add to 'wonTables' set list and on every loop check if that table has won. If yes then 'continue' or skip to the next table.
                 
                 if (win) { // If boolean value is TRUE
                     // Get/find the sum of all unmarked numbers 
-                    System.out.println("win");
-                    // After winning get the table that won and the last number that won
+                    System.out.println("\n########## WIN ##########" );
+                    // After winning get the table that won and the last number that won and the drawn number this far
+                    System.out.println("Winning table: \n" + Arrays.deepToString(table).replace("], ", "]\n"));
+                    System.out.println("Winning number: " + num);
+                    System.out.println("Drawn numbers: " + Arrays.toString(drawNums.toArray()));
+
+                    // I could iterate the numbers again and if there are same numbers as in the drawn nymbers list then remove?
+                    // After removing iterate numbers and get the sum
+                    // After the sum multiply with the last called number
+                    // == final score
+
+                    // total = Arrays.stream(table).mapToInt(arr -> Arrays.stream(arr).sum()).sum();
+                    // IntStream iStream = Stream.of(table).flatMapToInt(n -> Arrays.stream(n)).filter(a -> !drawNums.contains(a));
+                    // iStream.forEach(System.out::println);
+                    
+                    total = Stream.of(table).flatMapToInt(row -> Arrays.stream(row)).filter(nums -> !drawNums.contains(nums)).sum();
+
+                    //System.out.println("Total: " + total);
+                    //System.out.println(14+21+17+24+4+10+16+15+9+19+18+8+23+26+20+22+11+13+6+5+2+0+12+3+7);
+                    // System.out.println(10+16+15+19+18+8+26+20+22+13+6+5+12+3);
+
+                    System.out.println("Total * winning number: " + total*num);
+
+                    System.out.println("##### WIN ##### \n" );
+                    return total*num;
                 }
             }
         }
@@ -85,13 +116,14 @@ public class Day4 {
 
         // Get the final score of the winning board???
 
-        return null;
+        return null; // Returns value if has win. Else I could return 0, -1, NULL.
     }
 
-    private static boolean checkForWins(int[][] table, List<Integer> drawNum) {
-        System.out.println("Rows");
-        System.out.println("numbers:"+Arrays.toString(drawNum.toArray()));
-        System.out.println(Arrays.deepToString(table).replace("], ", "]\n"));
+    private static boolean checkForWins(int[][] table, Set<Integer> drawNum) {
+        //System.out.println("Rows");
+        //System.out.println("numbers:"+Arrays.toString(drawNum.toArray()));
+        //System.out.println(Arrays.deepToString(table).replace("], ", "]\n"));
+        
         // Check vertically (row)
         // Create another list to store all row numbers and compare to the drawNum list
         // Compare row list to drawNum list
@@ -129,7 +161,7 @@ public class Day4 {
 
         //System.out.println("row:"+Arrays.toString(rowOrColumnNumbers.toArray())); 
 
-        System.out.println("No winning rows");
+        //System.out.println("No winning rows");
         
         // Check horizontally (column)
         // Create another list to store all column numbers and compare to the drawNum list
@@ -147,10 +179,10 @@ public class Day4 {
             colNumbers.clear();
         }
 
-        System.out.println("No winning columns");
+        //System.out.println("No winning columns");
 
         // Return false if no wins with the table
-        System.out.println(" ");
+        //System.out.println(" ");
         return false;
     }
 
